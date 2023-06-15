@@ -2,7 +2,6 @@ package dao;
 
 import com.playdata.todos.config.JdbcConnection;
 import dto.User;
-import org.apache.catalina.Manager;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +13,9 @@ import java.util.List;
 public class UserDao {
     List<User> users = new ArrayList<User>();
 
-    public void insert(User user) {
+    public static void insert(User user) {
         Connection conn = new JdbcConnection().getJdbc();
-        String sql = "insert into users(username,password,nane)" + "values(?,?,?)";
+        String sql = "insert into users(username,password,name)" + "values(?,?,?)";
 
 
         try {
@@ -33,7 +32,7 @@ public class UserDao {
     }
 
 
-    public void login(String id, String password) {
+    public boolean login(String id, String password) {
         Connection conn = new JdbcConnection().getJdbc();
         String sql = "select id, username, name, create_at" + "from user" + "where username=? and password =?";
 
@@ -50,6 +49,7 @@ public class UserDao {
             throw new RuntimeException(e);
         }
 
+        return false;
     }
 
     private User makseUser(ResultSet resultSet) {
