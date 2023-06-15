@@ -16,8 +16,6 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("views/user.html").forward(req,resp);
         resp.setStatus(200);
-
-        super.doGet(req, resp);
     }
 
     @Override
@@ -30,8 +28,9 @@ public class UserServlet extends HttpServlet {
         System.out.println(name);
         resp.sendRedirect("/user");
         resp.setStatus(201);
-//        super.doPost(req, resp);
     }
+
+
 
     @Override
     public void destroy() {
