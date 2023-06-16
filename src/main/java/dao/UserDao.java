@@ -2,6 +2,7 @@ package dao;
 
 import com.playdata.todos.config.JdbcConnection;
 import dto.User;
+import org.apache.catalina.tribes.tipis.AbstractReplicatedMap;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
+ feautre/login
     List<User> users = new ArrayList<User>();
 
     public static void insert(User user) {
+
+    public static User me;
+
+    public void insert(User user){
+ dev
         Connection conn = new JdbcConnection().getJdbc();
         String sql = "insert into users(username,password,name)" + "values(?,?,?)";
 
@@ -48,7 +55,13 @@ public class UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+ feautre/login
 
+     if (users.size() !=0){
+            me =users.get(0);
+        return true;
+        }
+ dev
         return false;
     }
 
