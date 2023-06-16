@@ -9,15 +9,18 @@ import java.io.IOException;
 public class User {
 
 
-    public User(Integer id, String username, String password, String name) {
+    public User(Integer id, String username, String password, String name, String createAt) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
+        this.createAt  = createAt;
     }
     private Integer id;
 
     private String username;
+
+    private String createAt;
 
     public Integer getId() {
         return id;

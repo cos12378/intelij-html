@@ -5,12 +5,10 @@ import dao.UserDao;
 import dto.User;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
-public class UserServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
@@ -20,8 +18,8 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         History.setHistory(req, resp);
 
-        req.getRequestDispatcher("views/user.html").forward(req,resp);
-        resp.setStatus(200);
+        req.getRequestDispatcher("views/login.html").forward(req, resp);
+
         BackServlet.back(req,resp);
     }
 
@@ -29,20 +27,21 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        String name = req.getParameter("name");
-        User user = new User ( null, username, password, name, null);
-        UserDao userDao = new UserDao();
-        UserDao.insert(user);
-        resp.sendRedirect("/login");
+        User user = new UserDao().login(username,password);
+//        Cookie cookie2 = new Cookie("uid", user.getName());
+//        Cookie cookie = new Cookie("uname", user.getId().toString());
+//        resp.addCookie(cookie);
+//        resp.addCookie(cookie2);
+//        cookie.setMaxAge(10);
+        HttpSession session = req.getSession();
+        session.setAttribute("uname", user.getName());
+        if(user!=null){
+            resp.sendRedirect("/main");
+        }else resp.sendRedirect("/user");
     }
-
-
 
     @Override
     public void destroy() {
         super.destroy();
     }
-
-
-
 }
