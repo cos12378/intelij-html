@@ -27,5 +27,6 @@ public class JdbcConnection {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
