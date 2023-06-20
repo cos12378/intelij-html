@@ -2,6 +2,7 @@
   <configuration default="false" name="console.sql" type="DatabaseScript" editBeforeRun="true" singleton="false" nameIsGenerated="true">
     <script-file value="$APPLICATION_CONFIG_DIR$/consoles/db/fcb502b5-3453-4d0b-8584-f8db1960e761/console.sql" />
     <script-mode>FILE</script-mode>
+    <data-source id="fcb502b5-3453-4d0b-8584-f8db1960e761" />
     <method v="2" />
   </configuration>
 </component>
